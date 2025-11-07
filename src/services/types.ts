@@ -430,7 +430,7 @@ export const CheckoutRequestSchema: z.ZodType<MayaCheckoutRequest> = z
 	.object({
 		totalAmount: TotalAmountSchema,
 		requestReferenceNumber: RequestReferenceNumberSchema,
-		buyer: z.union([KountBuyerSchema, BasicBuyerSchema]),
+		buyer: z.union([KountBuyerSchema, BasicBuyerSchema]).optional(),
 		items: z.array(ItemSchema).optional(),
 		redirectUrl: RedirectUrlSchema.optional(),
 		metadata: MetadataSchema.optional(),
