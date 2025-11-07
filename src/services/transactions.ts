@@ -1,1 +1,7 @@
-export class MayaTransactionService {}
+export class MayaTransactionService {
+	capturePayment() {}
+	retrievePaymentViaID() {}
+	retrievePaymentViaRRN() {}
+	retrievePaymentStatus() {}
+	cancelPaymentViaID() {}
+}

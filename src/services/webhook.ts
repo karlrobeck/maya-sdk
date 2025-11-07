@@ -1,1 +1,7 @@
-export class MayaWebhookService {}
+export class MayaWebhookService {
+	createWebhook() {}
+	getWebhooks() {}
+	getWebhook() {}
+	updateWebhook() {}
+	deleteWebhook() {}
+}
