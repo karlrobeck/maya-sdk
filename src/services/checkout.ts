@@ -1,8 +1,8 @@
-import { type MayaRequestExecutor, MayaAPIEnvironment } from "../client";
+import { MayaAPIEnvironment, type MayaRequestExecutor } from "../client";
 import {
 	MayaError,
-	MayaPaymentErrorCodes,
 	type MayaErrorResponse,
+	MayaPaymentErrorCodes,
 } from "../errors";
 
 /** Represents the total amount for a checkout transaction. */
@@ -164,8 +164,9 @@ export class MayaCheckoutService
 
 			if (!errorCode) {
 				throw new MayaError(
-					"Internal Error",
+					error.error,
 					MayaPaymentErrorCodes.PAY_WITH_MAYA_ERROR,
+					error.reference,
 				);
 			}
 
