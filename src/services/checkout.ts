@@ -127,7 +127,6 @@ export class MayaCheckoutService
 	}
 
 	validate(): MayaCheckoutRequest {
-		// todo: use validation library for this case
 		if (this.request) {
 			return this.request;
 		}
@@ -142,7 +141,7 @@ export class MayaCheckoutService
 		return this;
 	}
 
-	async send(fetcher: typeof fetch): Promise<MayaCheckoutResponse> {
+	async send(fetcher: typeof fetch = fetch): Promise<MayaCheckoutResponse> {
 		const request = this.validate();
 
 		const response = await fetcher(this.environment.apiUrl, {
@@ -150,7 +149,7 @@ export class MayaCheckoutService
 			headers: {
 				accept: "application/json",
 				"content-type": "application/json",
-				authorization: `Basic ${this.config.publicKey}:${this.config.secretKey}`,
+				authorization: `Basic ${btoa(`${this.config.publicKey}:${this.config.secretKey}`)}`,
 			},
 			body: JSON.stringify(request),
 		});
@@ -173,6 +172,6 @@ export class MayaCheckoutService
 			throw new MayaError(error.error, errorCode, error.reference);
 		}
 
-		return response as MayaCheckoutResponse;
+		return (await response.json()) as MayaCheckoutResponse;
 	}
 }
