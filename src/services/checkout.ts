@@ -75,7 +75,7 @@ export class MayaCheckoutService
 				headers: {
 					accept: "application/json",
 					"content-type": "application/json",
-					authorization: `Basic ${btoa(`${this.config.publicKey}:`)}`,
+					authorization: `Basic ${btoa(`${this.config.publicKey}`)}`,
 				},
 				body: JSON.stringify(request),
 			},
