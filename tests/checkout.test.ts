@@ -46,7 +46,6 @@ describe("Checkout API test", () => {
 			const result = await response();
 			expect(result.checkoutId).not.toBeUndefined();
 			expect(result.redirectUrl).not.toBeUndefined();
-		} else {
 		}
 	});
 });
