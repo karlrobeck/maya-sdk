@@ -1,11 +1,13 @@
 import { describe, it, beforeAll, expect } from "bun:test";
 import { MayaClient } from "../src/client";
 import type { MayaCheckoutRequest } from "../src/services/types";
+import { MayaError, MayaPaymentErrorCodes } from "../src/errors";
 
 type CheckOutTestCases = {
 	name: string;
 	input: MayaCheckoutRequest;
 	success: boolean;
+	expectedError?: MayaError;
 };
 
 describe("Checkout API test", () => {
@@ -34,6 +36,10 @@ describe("Checkout API test", () => {
 				totalAmount: { value: "string", currency: "PHP" } as any,
 				requestReferenceNumber: crypto.randomUUID(),
 			},
+			expectedError: new MayaError(
+				"Validation error",
+				MayaPaymentErrorCodes.INVALID_JSON_FORMAT,
+			),
 			success: false,
 		},
 		{
@@ -81,6 +87,8 @@ describe("Checkout API test", () => {
 			const result = await response();
 			expect(result.checkoutId).not.toBeUndefined();
 			expect(result.redirectUrl).not.toBeUndefined();
+		} else {
+			expect(response).toThrowError(testCase.expectedError);
 		}
 	});
 });
