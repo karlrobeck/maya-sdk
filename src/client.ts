@@ -1,4 +1,5 @@
 import type { MayaError } from "./errors";
+import { MayaCheckoutService } from "./services/checkout";
 
 export const MayaAPIEnvironment = {
 	SANDBOX: {
@@ -23,4 +24,18 @@ export interface MayaRequestExecutor<Request, Response> {
 	 * @throws {MayaError} When the API returns an error response
 	 */
 	send(fetcher: typeof fetch): Promise<Response>;
+}
+
+export class MayaClient {
+	public checkout: MayaCheckoutService;
+
+	constructor(
+		environment: keyof typeof MayaAPIEnvironment,
+		config: {
+			publicKey: string;
+			secretKey?: string;
+		},
+	) {
+		this.checkout = new MayaCheckoutService(environment, config);
+	}
 }
