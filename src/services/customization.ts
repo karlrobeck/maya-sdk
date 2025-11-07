@@ -1,1 +1,5 @@
-export class MayaCustomizationService {}
+export class MayaCustomizationService {
+	createPaymentToken() {}
+
+	createPayment() {}
+}
