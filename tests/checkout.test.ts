@@ -36,6 +36,41 @@ describe("Checkout API test", () => {
 			},
 			success: false,
 		},
+		{
+			name: "should create a checkout with basic user information",
+			input: {
+				totalAmount: { value: 100.0, currency: "PHP" },
+				buyer: {
+					firstName: "john james",
+					lastName: "doe",
+					billingAddress: {
+						city: "Caloocan",
+						countryCode: "PH",
+						line1: "123 street",
+						line2: "Village subdivision",
+						state: "NCR",
+						zipCode: "1400",
+					},
+				},
+				items: [
+					{
+						name: "Shoe box",
+						totalAmount: {
+							value: 100,
+							details: {
+								discount: 0.5,
+								subtotal: 100,
+								serviceCharge: 10,
+								shippingFee: 150,
+								tax: 20,
+							},
+						},
+					},
+				],
+				requestReferenceNumber: crypto.randomUUID(),
+			},
+			success: true,
+		},
 	];
 
 	it.each(cases)("$name", async (testCase) => {

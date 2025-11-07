@@ -25,15 +25,15 @@ export enum Gender {
 /** Represents amount breakdown details */
 export type AmountDetails = {
 	/** Subtotal value before applying discounts or additional fees */
-	subtotal?: string;
+	subtotal?: number | string;
 	/** Discount applied on the amount */
-	discount?: string;
+	discount?: number | string;
 	/** Service charge applied on the amount */
-	serviceCharge?: string;
+	serviceCharge?: number | string;
 	/** Shipping fee on the amount */
-	shippingFee?: string;
+	shippingFee?: number | string;
 	/** Tax on the amount */
-	tax?: string;
+	tax?: number | string;
 };
 
 /** Represents the total amount for a checkout transaction. */
@@ -208,7 +208,7 @@ export type MayaCheckoutRequest = {
 	/** Merchant's unique reference number for the transaction (required, 1-36 chars) */
 	requestReferenceNumber: string;
 	/** Information about the buyer/payer (optional for basic, required for Kount fraud protection) */
-	buyer?: Buyer;
+	buyer?: Buyer | z.infer<typeof KountBuyerSchema>;
 	/** List of items being purchased */
 	items?: Item[];
 	/** URLs for post-payment redirects */
@@ -243,11 +243,26 @@ const CurrencySchema = z
 // Total Amount schema with optional details
 const AmountDetailsSchema: z.ZodType<AmountDetails> = z
 	.object({
-		subtotal: z.string().optional(),
-		discount: z.string().optional(),
-		serviceCharge: z.string().optional(),
-		shippingFee: z.string().optional(),
-		tax: z.string().optional(),
+		subtotal: z
+			.number()
+			.transform((v) => String(v))
+			.optional(),
+		discount: z
+			.number()
+			.transform((v) => String(v))
+			.optional(),
+		serviceCharge: z
+			.number()
+			.transform((v) => String(v))
+			.optional(),
+		shippingFee: z
+			.number()
+			.transform((v) => String(v))
+			.optional(),
+		tax: z
+			.number()
+			.transform((v) => String(v))
+			.optional(),
 	})
 	.strict();
 
