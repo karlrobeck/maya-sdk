@@ -1,4 +1,3 @@
-import type { MayaError } from "./errors";
 import { MayaCheckoutService } from "./services/checkout";
 
 export const MayaAPIEnvironment = {
