@@ -1,9 +1,10 @@
 {
-  "name": "maya-sdk",
+  "name": "@karlrobeck/maya-sdk",
   "module": "index.ts",
   "type": "module",
   "private": true,
   "devDependencies": {
+    "@biomejs/biome": "2.3.4",
     "@types/bun": "latest"
   },
   "peerDependencies": {
