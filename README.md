@@ -1,15 +1,17 @@
-# maya-sdk
+# Maya SDK
 
-To install dependencies:
+## Overview
 
-```bash
-bun install
-```
+## Table of contents
 
-To run:
+## Reasoning
 
-```bash
-bun run index.ts
-```
+## Features
 
-This project was created using `bun init` in bun v1.3.1. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+## Installation
+
+## Examples
+
+## Roadmap 
+
+## License
